@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37111.16 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CookieClickerV1", "CookieClickerV1\CookieClickerV1.vcxproj", "{02A9093E-BEF1-473B-8281-C31EADFB412A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02A9093E-BEF1-473B-8281-C31EADFB412A}.Debug|x64.ActiveCfg = Debug|x64
+		{02A9093E-BEF1-473B-8281-C31EADFB412A}.Debug|x64.Build.0 = Debug|x64
+		{02A9093E-BEF1-473B-8281-C31EADFB412A}.Debug|x86.ActiveCfg = Debug|Win32
+		{02A9093E-BEF1-473B-8281-C31EADFB412A}.Debug|x86.Build.0 = Debug|Win32
+		{02A9093E-BEF1-473B-8281-C31EADFB412A}.Release|x64.ActiveCfg = Release|x64
+		{02A9093E-BEF1-473B-8281-C31EADFB412A}.Release|x64.Build.0 = Release|x64
+		{02A9093E-BEF1-473B-8281-C31EADFB412A}.Release|x86.ActiveCfg = Release|Win32
+		{02A9093E-BEF1-473B-8281-C31EADFB412A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C2EDF99-C42B-4979-B34A-8099E40F3836}
+	EndGlobalSection
+EndGlobal
