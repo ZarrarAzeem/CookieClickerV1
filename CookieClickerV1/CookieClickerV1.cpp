@@ -78,7 +78,7 @@ int main()
                     else {
                         cash -= cashMultiplierUpgradeCost;
                         cashMultiplier *= 2;
-                        cashMultiplierUpgradeCost *= 3;
+                        cashMultiplierUpgradeCost *= 4;
                         cashMultiplierUpgradeLevel++;
 
                         std::cout << "Cash Multiplier Upgraded\n";
@@ -101,7 +101,7 @@ int main()
                     else {
                         cash -= cookiesPerClickUpgradeCost;
                         cookiesPerClick *= 2;
-                        cookiesPerClickUpgradeCost *= 4;
+                        cookiesPerClickUpgradeCost *= 7;
                         cookiesPerClickUpgradeLevel++;
 
                         std::cout << "Cookies per Click Upgraded\n";
@@ -124,7 +124,7 @@ int main()
                     else {
                         cash -= critChanceUpgradeCost;
                         critChance += 0.025;
-                        critChanceUpgradeCost *= 4;
+                        critChanceUpgradeCost *= 9;
                         critChanceUpgradeLevel++;
 
                         std::cout << "Baker's Special Upgraded\n";
