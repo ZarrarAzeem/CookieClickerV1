@@ -34,15 +34,18 @@ int main()
         if (mainMenuChoice == 99) {
             game = false;
         }
+        // Clicking Interface
         else if (mainMenuChoice == 1) {
             // clicking logic
         }
-        else if (mainMenuChoice == 2) {
+        // Upgrade Menu
+        else if (mainMenuChoice == 2) { 
             char upgradeMenuChoice = 0;
 
             upgradeMenu();
             std::cin >> upgradeMenuChoice;
 
+            // Cash Multiplier
             if (upgradeMenuChoice == '1') {
                 std::cout << "Upgrade Cash Multiplier to level " << cashMultiplierUpgradeLevel + 1 << "?\n";
                 std::cout << "$" << cashMultiplierUpgradeCost << " Y|N\n\n";
@@ -63,14 +66,47 @@ int main()
                     }
                 }
             }
+            // Cookies per Click
             else if (upgradeMenuChoice == '2') {
+                std::cout << "Upgrade Cookies per Click to level " << cookiesPerClickUpgradeLevel + 1 << "?\n";
+                std::cout << "$" << cookiesPerClickUpgradeCost << " Y|N\n\n";
+                std::cout << "Cash: $" << cash << std::endl;
 
+                char option = '\0';
+                std::cin >> option;
+
+                if (option == 'Y' || option == 'y') {
+                    if (cash < cookiesPerClickUpgradeCost) {
+                        std::cout << "Sorry, you don't have enough money. Click more cookies\n";
+                    }
+                    else {
+                        cash -= cookiesPerClickUpgradeCost;
+                        cookiesPerClick *= 2;
+                        cookiesPerClickUpgradeCost *= 4;
+                        cookiesPerClickUpgradeLevel++;
+                    }
+                }
             }
+            // Baker's Special
             else if (upgradeMenuChoice == '3') {
+                std::cout << "Upgrade Baker's Special to level " << critChanceUpgradeLevel + 1 << "?\n";
+                std::cout << "$" << critChanceUpgradeCost << " Y|N\n\n";
+                std::cout << "Cash: $" << cash << std::endl;
 
-            }
-            else {
+                char option = '\0';
+                std::cin >> option;
 
+                if (option == 'Y' || option == 'y') {
+                    if (cash < critChanceUpgradeCost) {
+                        std::cout << "Sorry, you don't have enough money. Click more cookies\n";
+                    }
+                    else {
+                        cash -= critChanceUpgradeCost;
+                        critChance += 0.025;
+                        critChanceUpgradeCost *= 4;
+                        critChanceUpgradeLevel++;
+                    }
+                }
             }
         }
         // if incorrect input, prompt again
