@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <random>
 
 void mainMenu();
 void clickMenu();
@@ -24,9 +25,14 @@ int main()
     int cookiesPerClickUpgradeCost = 25;
     int cookiesPerClickUpgradeLevel = 1;
 
-    double critChance = 0.05;
+    double critChance = 0.01;
     int critChanceUpgradeCost = 20;
     int critChanceUpgradeLevel = 1;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    std::uniform_real_distribution<> distribution(0.00, 1.00);
 
     while (game) {
         mainMenu();
@@ -43,11 +49,19 @@ int main()
 
             bool clickLoop = true;
             while (clickLoop) {
-                
+                double critRoll = distribution(gen);
+
                 int key = _getch();
                 if (key == 32) {
-                    std::cout << "You got $" << cashPerClick(cashMultiplier, cookiesPerClick) << std::endl;
-                    cash = cash + cashPerClick(cashMultiplier, cookiesPerClick);
+                    if (critRoll <= critChance) {
+                        std::cout << "Baker's Special!!! You got $" << 3 * cashPerClick(cashMultiplier, cookiesPerClick) << std::endl;
+                        cash = cash + 3 * cashPerClick(cashMultiplier, cookiesPerClick);
+                    }
+                    else {
+                        std::cout << "You got $" << cashPerClick(cashMultiplier, cookiesPerClick) << std::endl;
+                        cash = cash + cashPerClick(cashMultiplier, cookiesPerClick);
+                    }
+                    
                 }
                 else
                     clickLoop = false;
@@ -77,7 +91,7 @@ int main()
                     }
                     else {
                         cash -= cashMultiplierUpgradeCost;
-                        cashMultiplier *= 2;
+                        cashMultiplier *= 4;
                         cashMultiplierUpgradeCost *= 4;
                         cashMultiplierUpgradeLevel++;
 
@@ -123,7 +137,7 @@ int main()
                     }
                     else {
                         cash -= critChanceUpgradeCost;
-                        critChance += 0.025;
+                        critChance += 0.015;
                         critChanceUpgradeCost *= 9;
                         critChanceUpgradeLevel++;
 
