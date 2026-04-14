@@ -1,8 +1,11 @@
 #include <iostream>
+#include <conio.h>
 
 void mainMenu();
 void clickMenu();
 void upgradeMenu();
+
+int cashPerClick(int cashMultiplier, int cookiesPerClick);
 
 int main()
 {
@@ -11,7 +14,7 @@ int main()
     std::cout << "How to play:      - Collect cookies to earn cash\n                  - Buy upgrades to make money faster\n                  - Get diabetes from all the cookies =)\n\n\n";
 
     bool game = true;
-    unsigned int cash = 0;
+    int cash = 0;
 
     int cashMultiplier = 1;
     int cashMultiplierUpgradeCost = 10;
@@ -36,7 +39,21 @@ int main()
         }
         // Clicking Interface
         else if (mainMenuChoice == 1) {
-            // clicking logic
+            clickMenu();
+
+            bool clickLoop = true;
+            while (clickLoop) {
+                
+                int key = _getch();
+                if (key == 32) {
+                    std::cout << "You got $" << cashPerClick(cashMultiplier, cookiesPerClick) << std::endl;
+                    cash = cash + cashPerClick(cashMultiplier, cookiesPerClick);
+                }
+                else
+                    clickLoop = false;
+            }
+
+            std::cout << "\nCash: $" << cash << std::endl;
         }
         // Upgrade Menu
         else if (mainMenuChoice == 2) { 
@@ -61,8 +78,10 @@ int main()
                     else {
                         cash -= cashMultiplierUpgradeCost;
                         cashMultiplier *= 2;
-                        cashMultiplierUpgradeCost *= 2.9;
+                        cashMultiplierUpgradeCost *= 3;
                         cashMultiplierUpgradeLevel++;
+
+                        std::cout << "Cash Multiplier Upgraded\n";
                     }
                 }
             }
@@ -84,6 +103,8 @@ int main()
                         cookiesPerClick *= 2;
                         cookiesPerClickUpgradeCost *= 4;
                         cookiesPerClickUpgradeLevel++;
+
+                        std::cout << "Cookies per Click Upgraded\n";
                     }
                 }
             }
@@ -105,6 +126,8 @@ int main()
                         critChance += 0.025;
                         critChanceUpgradeCost *= 4;
                         critChanceUpgradeLevel++;
+
+                        std::cout << "Baker's Special Upgraded\n";
                     }
                 }
             }
@@ -122,7 +145,8 @@ void mainMenu() {
 }
 
 void clickMenu() {
-
+    std::cout << "\nPress * Spacebar * to click\n";
+    std::cout << "\nPress any other key to exit to main menu\n";
 }
 
 void upgradeMenu() {
@@ -131,4 +155,13 @@ void upgradeMenu() {
     std::cout << "2 - Cookies per Click: Earn more cookies per click\n";
     std::cout << "3 - Baker's Special: Chance for a cookie to be worth 3x\n\n";
     std::cout << "Any key - Return to Main Menu\n\n";
+}
+
+int cashPerClick(int cashMultiplier, int cookiesPerClick) {
+    int baseIncome = 1;
+
+    baseIncome = baseIncome * cashMultiplier;
+    baseIncome = baseIncome * cookiesPerClick;
+
+    return baseIncome;
 }
