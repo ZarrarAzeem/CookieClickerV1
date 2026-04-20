@@ -9,13 +9,23 @@ void upgradeMenu();
 
 int cashPerClick(int cashMultiplier, int cookiesPerClick);
 
+void saveGame(int cash,
+    int cashMultiplier,
+    int cashMultiplierUpgradeLevel,
+    int cashMultiplierUpgradeCost,
+    int cookiesPerClick,
+    int cookiesPerClickUpgradeLevel,
+    int cookiesPerClickUpgradeCost,
+    int critChance,
+    int critChanceUpgradeLevel,
+    int critChanceUpgradeCost);
+
 int main()
 {
     std::cout << "*** Cookie Clicker Version 1.0 ***\n";
     std::cout << "   (This is my first ever game)    \n\n\n";
     std::cout << "How to play:      - Collect cookies to earn cash\n                  - Buy upgrades to make money faster\n                  - Get diabetes from all the cookies =)\n\n\n";
 
-    bool game = true;
     int cash = 0;
 
     int cashMultiplier = 1;
@@ -82,10 +92,10 @@ int main()
                         critChanceUpgradeCost = value;
                 }
 
-                std::cout << "Cash: $" << cash << std::endl;
-                std::cout << "Cash Multiplier Level: " << cashMultiplierUpgradeLevel << std::endl;
-                std::cout << "Cookies Per Click Level: " << cookiesPerClickUpgradeLevel << std::endl;
-                std::cout << "Baker's Special Level: " << critChanceUpgradeLevel << std::endl << std::endl;
+                std::cout << "Cash: $" << cash << '\n';
+                std::cout << "Cash Multiplier Level: " << cashMultiplierUpgradeLevel << '\n';
+                std::cout << "Cookies Per Click Level: " << cookiesPerClickUpgradeLevel << '\n';
+                std::cout << "Baker's Special Level: " << critChanceUpgradeLevel << '\n' << '\n';
 
                 break;
             }
@@ -96,17 +106,14 @@ int main()
     }
 
     // Main Game Loop
-    while (game) {
+    while (true) {
         mainMenu();
 
         int mainMenuChoice;
         std::cin >> mainMenuChoice;
 
-        if (mainMenuChoice == 99) {
-            game = false;
-        }
         // Clicking Interface
-        else if (mainMenuChoice == 1) {
+        if (mainMenuChoice == 1) {
             clickMenu();
 
             bool clickLoop = true;
@@ -116,11 +123,11 @@ int main()
                 int key = _getch();
                 if (key == 32) {
                     if (critRoll <= critChance) {
-                        std::cout << "Baker's Special!!! You got $" << 3 * cashPerClick(cashMultiplier, cookiesPerClick) << std::endl;
+                        std::cout << "Baker's Special!!! You got $" << 3 * cashPerClick(cashMultiplier, cookiesPerClick) << '\n';
                         cash = cash + 3 * cashPerClick(cashMultiplier, cookiesPerClick);
                     }
                     else {
-                        std::cout << "You got $" << cashPerClick(cashMultiplier, cookiesPerClick) << std::endl;
+                        std::cout << "You got $" << cashPerClick(cashMultiplier, cookiesPerClick) << '\n';
                         cash = cash + cashPerClick(cashMultiplier, cookiesPerClick);
                     }
                     
@@ -129,7 +136,7 @@ int main()
                     clickLoop = false;
             }
 
-            std::cout << "\nCash: $" << cash << std::endl;
+            std::cout << "\nCash: $" << cash << '\n';
         }
         // Upgrade Menu
         else if (mainMenuChoice == 2) { 
@@ -142,7 +149,7 @@ int main()
             if (upgradeMenuChoice == '1') {
                 std::cout << "Upgrade Cash Multiplier to level " << cashMultiplierUpgradeLevel + 1 << "?\n";
                 std::cout << "$" << cashMultiplierUpgradeCost << " Y|N\n\n";
-                std::cout << "Cash: $" << cash << std::endl;
+                std::cout << "Cash: $" << cash << '\n';
 
                 char option = '\0';
                 std::cin >> option;
@@ -157,7 +164,8 @@ int main()
                         cashMultiplierUpgradeCost *= 23;
                         cashMultiplierUpgradeLevel++;
 
-                        std::cout << "Cash Multiplier Upgraded\n";
+                        std::cout << "Cash Multiplier Upgraded to level " << cashMultiplierUpgradeLevel << '\n';
+                        std::cout << "Cash: $" << cash << '\n';
                     }
                 }
             }
@@ -165,7 +173,7 @@ int main()
             else if (upgradeMenuChoice == '2') {
                 std::cout << "Upgrade Cookies per Click to level " << cookiesPerClickUpgradeLevel + 1 << "?\n";
                 std::cout << "$" << cookiesPerClickUpgradeCost << " Y|N\n\n";
-                std::cout << "Cash: $" << cash << std::endl;
+                std::cout << "Cash: $" << cash << '\n';
 
                 char option = '\0';
                 std::cin >> option;
@@ -180,7 +188,8 @@ int main()
                         cookiesPerClickUpgradeCost *= 37;
                         cookiesPerClickUpgradeLevel++;
 
-                        std::cout << "Cookies per Click Upgraded\n";
+                        std::cout << "Cookies per Click Upgraded to level " << cookiesPerClickUpgradeLevel << '\n';
+                        std::cout << "Cash: $" << cash << '\n';
                     }
                 }
             }
@@ -188,7 +197,7 @@ int main()
             else if (upgradeMenuChoice == '3') {
                 std::cout << "Upgrade Baker's Special to level " << critChanceUpgradeLevel + 1 << "?\n";
                 std::cout << "$" << critChanceUpgradeCost << " Y|N\n\n";
-                std::cout << "Cash: $" << cash << std::endl;
+                std::cout << "Cash: $" << cash << '\n';
 
                 char option = '\0';
                 std::cin >> option;
@@ -203,21 +212,40 @@ int main()
                         critChanceUpgradeCost *= 49;
                         critChanceUpgradeLevel++;
 
-                        std::cout << "Baker's Special Upgraded\n";
+                        std::cout << "Baker's Special Upgraded to level " << critChanceUpgradeLevel << '\n';
+                        std::cout << "Cash: $" << cash << '\n';
                     }
                 }
             }
         }
         // if incorrect input, prompt again
+        else if (mainMenuChoice == 8) {
+            std::cout << "Saving Game...\n";
+            saveGame(cash,
+                cashMultiplier,
+                cashMultiplierUpgradeLevel,
+                cashMultiplierUpgradeCost,
+                cookiesPerClick,
+                cookiesPerClickUpgradeLevel,
+                cookiesPerClickUpgradeCost,
+                critChance,
+                critChanceUpgradeLevel,
+                critChanceUpgradeCost);
+            break;
+        }
+        else if (mainMenuChoice == 9) {
+            std::cout << "See you later!";
+            break;
+        }
         else
-            mainMenu();
+            continue;
     }
 
     return 0;
 }
 
 void mainMenu() {
-    std::cout << "\nPlease pick an option from the menu:          1 - Click Cookies\n                                              2 - Upgrade\n                                              99 - Quit Game\n\n";
+    std::cout << "\nPlease pick an option from the menu:  \t1 - Click Cookies\n      \t\t\t\t\t2 - Upgrade\n\n      \t\t\t\t\t8 - Save and Quit\n      \t\t\t\t\t9 - Quit Without Saving\n\n";
 }
 
 void clickMenu() {
@@ -241,3 +269,39 @@ int cashPerClick(int cashMultiplier, int cookiesPerClick) {
 
     return baseIncome;
 }
+
+void saveGame(int cash,
+    int cashMultiplier,
+    int cashMultiplierUpgradeLevel,
+    int cashMultiplierUpgradeCost,
+    int cookiesPerClick,
+    int cookiesPerClickUpgradeLevel,
+    int cookiesPerClickUpgradeCost,
+    int critChance,
+    int critChanceUpgradeLevel,
+    int critChanceUpgradeCost) {
+
+    std::ofstream saveFile("saveGame.txt");
+
+    if (!saveFile.is_open()) {
+        std::cout << "Save File could not be opened.\n\n";
+        return;
+    }
+
+    saveFile << "cash " << cash << '\n';
+    saveFile << "cashMultiplierUpgradeLevel " << cashMultiplierUpgradeLevel << '\n';
+    saveFile << "cashMultiplierUpgradeCost " << cashMultiplierUpgradeCost << '\n';
+    saveFile << "cookiesPerClick " << cookiesPerClick << '\n';
+    saveFile << "cookiesPerClickUpgradeLevel " << cookiesPerClickUpgradeLevel << '\n';
+    saveFile << "cookiesPerClickUpgradeCost " << cookiesPerClickUpgradeCost << '\n';
+    saveFile << "critChance " << critChance << '\n';
+    saveFile << "critChanceUpgradeLevel " << critChanceUpgradeLevel << '\n';
+    saveFile << "critChanceUpgradeCost " << critChanceUpgradeCost << '\n';
+
+    saveFile.close();
+
+    std::cout << "Game Saved. See you later!";
+}
+
+// add save game/quit without saving to main menu logic
+// add _getch() for all key presses so game is more streamlined
