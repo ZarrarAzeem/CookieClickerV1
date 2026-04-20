@@ -38,3 +38,6 @@ Makefile
 # OS files
 .DS_Store
 Thumbs.db
+
+# Game Save files
+saveGame*.txt
