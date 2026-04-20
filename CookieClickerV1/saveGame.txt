@@ -1,9 +1,0 @@
-cash 13
-cashMultiplierUpgradeLevel 2
-cashMultiplierUpgradeCost 575
-cookiesPerClick 1
-cookiesPerClickUpgradeLevel 1
-cookiesPerClickUpgradeCost 40
-critChance 0
-critChanceUpgradeLevel 1
-critChanceUpgradeCost 50
